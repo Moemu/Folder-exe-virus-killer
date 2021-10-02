@@ -1,5 +1,5 @@
 import  PySimpleGUI as sg
-import main
+import main,os
 
 sg.theme('Material2')
 exepath=os.getcwd()
@@ -11,14 +11,14 @@ layout=[
     [sg.Button('阻止U盘继续被感染exe病毒',font=('楷体 20'))]
 ]
 
-event,value=sg.Window('文件夹exe病毒专杀器',layout=layout).Read()
+event,value=sg.Window('文件夹exe病毒专杀器',layout=layout,icon='LOGO.ico').Read()
 
 if event=='查看电脑有没有文件夹exe病毒':
     name=main.checkreg()
     if name!=None:
-        sg.popup('在您的电脑上发现了exe病毒',font=('楷体 15'),text_color='Red')
+        sg.popup('在您的电脑上发现了exe病毒',font=('楷体 15'),text_color='Red',icon='LOGO.ico')
     else:
-        sg.popup('没有在注册表检查到文件夹exe病毒，您的系统正常',font=('楷体 15'))
+        sg.popup('没有在注册表检查到文件夹exe病毒，您的系统正常',font=('楷体 15'),icon='LOGO.ico')
 
 elif event=='清除电脑中的文件夹exe病毒':
     main.main()
@@ -39,6 +39,6 @@ elif event=='阻止U盘继续被感染exe病毒':
         [sg.Input()],
         [sg.Button('确认',font=('宋体 10'))]
     ]
-    value=sg.Window(title='输入盘符',layout=layout).Read()
+    value=sg.Window(title='输入盘符',layout=layout,icon='LOGO.ico').Read()
     panpath=value[1][0]
     main.safeusb(panpath,exepath)   

@@ -96,7 +96,7 @@ def removeusbvirous(panpath):
     try:
         os.chdir(pandir)
     except:
-        sg.popup('您的输入有误...',font=('宋体 10'))
+        sg.popup('您的输入有误...',font=('宋体 10'),icon='LOGO.ico')
         exit()
     filelist=os.listdir()
     num=0
@@ -111,14 +111,14 @@ def removeusbvirous(panpath):
                 os.system(ml)
         except:
             pass
-    sg.popup('完成,但部分文件夹exe可能需要您手动删除')
+    sg.popup('完成,但部分文件夹exe可能需要您手动删除',icon='LOGO.ico')
 
 def safeusb(panpath,exepath):
     pandir=panpath+':'
     try:
         os.chdir(pandir)
     except:
-        sg.popup('您的输入有误...',font=('宋体 10'))
+        sg.popup('您的输入有误...',font=('宋体 10'),icon='LOGO.ico')
         exit()
     try:
         os.remove('autorun.inf')
@@ -132,16 +132,16 @@ def safeusb(panpath,exepath):
     os.system(ml)
     os.system('attrib +H safe.exe')
     os.system('attrib +H autorun.inf')
-    sg.popup('完成...')
+    sg.popup('完成...',icon='LOGO.ico')
    
 def main():
     name=checkreg()
     if name!=None:
         removevirus(name).main()
         checkdir().check()
-        sg.popup('完成,但部分文件夹exe可能需要您手动删除',font=('楷体 15'))
+        sg.popup('完成,但部分文件夹exe可能需要您手动删除',font=('楷体 15'),icon='LOGO.ico')
     else:
-        sg.popup('没有在注册表检查到文件夹exe病毒，您的系统正常，但是我们也会检查在硬盘中是否存在文件夹exe病毒',font=('楷体 15'))
+        sg.popup('没有在注册表检查到文件夹exe病毒，您的系统正常，但是我们也会检查在硬盘中是否存在文件夹exe病毒',font=('楷体 15'),icon='LOGO.ico')
         checkdir().check()
 
 if __name__=='__main__':
