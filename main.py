@@ -28,13 +28,7 @@ class removevirus:
             os.system(ml)
             ml='rd '+self.name+' /s /q'
             os.system(ml)
-            os.chdir("c:\\Windows\\System32")
-            filelist=['com.run','dp1.fne','eAPI.fne','internet.fne','krnln.fnr','og.dll','og.edt','RegEx.fnr','fne','spec.fne','ul.dll','winvcreg.exe']
-            for i in filelist:
-                try:
-                    os.remove(i)
-                except:
-                    pass
+            os.system('del %HOMEPATH%\AppData\Local\Temp\*')
         except:
             pass
 
@@ -57,6 +51,7 @@ class removevirus:
             os.system(ml)
         except:
             print('无病毒进程...')
+        os.remove('list.txt')
         print('删除病毒生成的文件...')
         self.files()
 
