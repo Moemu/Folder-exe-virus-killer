@@ -14,9 +14,41 @@
 
 关于这个病毒的更多信息：[文件夹EXE病毒_百度百科 (baidu.com)](https://baike.baidu.com/item/文件夹EXE病毒/263553)
 
+2021.10.23更新：据White_mu最新研究发现，目前学校电脑上的文件夹exe病毒为**变种**版本，因此百科上内容不适用，因此我们推荐查看病毒运行详细分析：[微步在线云沙箱 (threatbook.cn)](https://s.threatbook.cn/report/file/ac4b91258b3a675af14a1674288f04512deb0c166d4f0eaa93a4b1fa24e62b3f/?env=win7_sp1_enx86_office2013)
+
 事实上，这个病毒已经被各大杀毒软件列为危险项，杀毒软件会自动删除它，但是在没有安装杀毒软件的系统上，此类病毒非常广泛，因此，我们需要安装杀毒软件来消除此病毒
 
 但有些时候，杀毒软件可能不会工作（比如学校电脑的冰点还原+落后的Windows Defender），让此类病毒拥有更广阔的传播空间，因此，WhitemuTeam在9个小时的努力后写出了一款程序，使其能够暂时在一定范围内撑过一段时间不被感染文件夹exe病毒
+
+# 路径
+
+我们发现此病毒的主程序路径为（Windows Media Player下一目录可能随机）：
+
+```
+C:\Program Files\Windows Media Player\e\b\0\3\3\9\1\4\a\b\e\3\0\2\4\2\1\1\e\5\a\d\5\9\9\3\6\9\b\6\2\b\autorun.inf\svchost.exe
+```
+
+因为某种原因，autorun.inf实际上是一个文件夹，但是被赋予了删除属性，直接打开会打开回收站，因此你需要通过以下代码查看autorun.inf中的文件（我现在把autorun.inf前的文件夹拷贝到我的U盘中了）
+
+```powershell
+G:\c>cd autorun.inf
+G:\c\autorun.inf>dir
+ 驱动器 G 中的卷是 White_mu
+ 卷的序列号是 0EAF-06B4
+ G:\c\autorun.inf 的目录
+2021/10/21  17:57    <DIR>          ..
+2011/04/22  14:08         1,148,978 svchost.exe
+               1 个文件      1,148,978 字节
+               1 个目录 29,763,551,232 可用字节
+G:\c\autorun.inf>copy svchost.exe ..
+已复制         1 个文件。
+```
+
+你可以注意到此病毒主程序为svchost.exe，如果您运行文件夹exe病毒（任何文件夹.exe），此svchost.exe就会在后台运行，但是真正的svchost.exe是系统进程，我们需要辨别哪个svchost.exe是病毒主程序来终止它的进程，打开任务管理器
+
+找到svchost.exe，看到后面用户名一栏是不是seewo(非System)，若是，终止它的进程，若不是，那就不是病毒主程序,不用终止，而且终止前要勾选一个选项后才能终止进程，然后蓝屏:(
+
+病毒运行详细分析：[微步在线云沙箱 (threatbook.cn)](https://s.threatbook.cn/report/file/ac4b91258b3a675af14a1674288f04512deb0c166d4f0eaa93a4b1fa24e62b3f/?env=win7_sp1_enx86_office2013)
 
 # 使用
 
@@ -32,7 +64,7 @@
 
 上述操作完成后，部分文件夹exe病毒可能需要您手动删除，删除XP图标的文件夹exe即可
 
-然后我们需要继续点击“阻止U盘继续被感染exe病毒”，然后这个程序就会在U盘目录下删除原有的`autorun.inf`（如果有提前自定义图标的话，图标可能会失效）并复制程序根目录的`autorun.inf`和`safe.exe`到程序根目录中并添加隐藏属性（如有自定义图标需求请更改`autorun.inf`并添加icon属性而不是删减里面的内容），完成后，每当U盘插入后，`safe.exe`会自动运行，检查电脑中有没有文件夹`exe`病毒并尝试修复（每隔60s检查一次，一共3次）
+然后我们点击阻止病毒继续感染按钮，这会在病毒主程序存放的目录下（C:\Program Files\Windows Media）新建一个名为'c'的文件夹，此文件夹权限锁死，Everyone被禁止拥有此文件夹的所有权限，此时文件夹exe尝试感染电脑时就会停止工作
 
 # 源码
 
@@ -52,9 +84,11 @@
 
 Windows Defender没有发挥防病毒的作用（而且一个主流杀毒软件都没有）
 
-你家交问卷，看B站学校开幕式视频用IE11?
+但现在我们准备攻破冰点还原....准备给电脑装杀毒软件
 
 # 关于
+
+版本：v2.0
 
 作者：White_mu(WhitemuTeam):高一，负责程序开发，文件夹exe病毒受害者
 
