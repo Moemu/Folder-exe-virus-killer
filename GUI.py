@@ -23,9 +23,9 @@ if event=='查看电脑有没有文件夹exe病毒':
 elif event=='清除电脑中的文件夹exe病毒':
     main.main()
 
-elif event=='清除U盘中的文件夹exe病毒':
+elif event=='清除指定盘符中的文件夹exe病毒':
     layout=[
-        [sg.Text('输入您U盘的盘符，例如：D,F,G，即一个英文字母',font=('宋体 10'))],
+        [sg.Text('输入盘符，例如：D,F,G，即一个英文字母',font=('宋体 10'))],
         [sg.Input()],
         [sg.Button('确认',font=('宋体 10'))]
     ]
