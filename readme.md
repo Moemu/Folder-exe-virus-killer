@@ -58,9 +58,7 @@ G:\c\autorun.inf>copy svchost.exe ..
 
 运行`GUI.exe`或`GUI.py`(Python环境下)
 
-首先我们点击“清除电脑中的文件夹exe病毒”，这会读取注册表并找出病毒的主文件名并结束病毒进程，删除病毒主文件及其依赖文件（包括易语言支持库），这还会删除所有的假文件夹，显示隐藏的真文件夹
-
-然后我们也可以“清除U盘中的文件夹exe病毒”，这个实际上和上面的选项没有太大差异，换句话来说就是自定义清除范围，如果你点了“清除电脑中的文件夹exe病毒”就不用点这里（如果你提前插入U盘的话）
+首先我们点击“清除电脑中的文件夹exe病毒”，这会读取注册表并找出病毒的主文件名并结束病毒进程，删除病毒主文件及其依赖文件（包括易语言支持库和临时文件），这还会删除所有的假文件夹，显示隐藏的真文件夹
 
 上述操作完成后，部分文件夹exe病毒可能需要您手动删除，删除XP图标的文件夹exe即可
 
@@ -72,7 +70,7 @@ G:\c\autorun.inf>copy svchost.exe ..
 
 为保证安全性，我们开源了此程序：
 
-程序源码：`main.py`(主程序) `GUI.py`(GUI支持) `safe.py`(隐藏杀毒)
+程序源码：`main.py`(主程序) `GUI.py`(GUI支持) 
 
 [WhitemuTeam/Folder-exe-virus-killer: 文件夹exe专杀器（针对某高中的拉跨系统制作） (github.com)](https://github.com/WhitemuTeam/Folder-exe-virus-killer)
 
